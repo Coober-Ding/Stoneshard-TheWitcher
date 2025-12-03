@@ -9,6 +9,7 @@ public partial class TheWitcher : Mod
     private void AddSkill_Quen_Sign()
     {
         AdjustSkillIcon("s_skills_quen_sign");
+        AdjustSpellCastSprites("s_quensign_cast_", 15, 62);
 
         Msl.InjectTableSkillsLocalization(
             new LocalizationSkill(
@@ -80,6 +81,7 @@ public partial class TheWitcher : Mod
                 ignore_interact = true
                 is_moving = false
             "),
+
             new MslEvent(eventType: EventType.Other, subtype: 13, code: @$"
                 event_inherited()
                 scr_stop_player()
@@ -97,6 +99,7 @@ public partial class TheWitcher : Mod
                     }}
                 }}
             "),
+
             new MslEvent(eventType: EventType.Other, subtype: 17, code: @$"
                 if instance_exists(owner)
                 {{

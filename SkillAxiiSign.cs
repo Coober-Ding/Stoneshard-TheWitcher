@@ -9,6 +9,7 @@ public partial class TheWitcher : Mod
     private void AddSkill_Axii_Sign()
     {
         AdjustSkillIcon("s_skills_axii_sign");
+        AdjustSpellCastSprites("s_axiisign_cast_", 16, 62);
 
         Msl.InjectTableSkillsLocalization(
             new LocalizationSkill(
@@ -83,6 +84,7 @@ public partial class TheWitcher : Mod
             new MslEvent(eventType: EventType.Create, subtype: 0, code: @"
                 event_inherited()
                 skill = ""Axii_Sign""
+                startcast_sprite_tag = ""s_axiisign_cast_""
                 scr_skill_atr(""Axii_Sign"")
                 ds_list_add(attribute,
                     ds_map_find_value(global.attribute, ""Magic_Power""),
@@ -139,7 +141,8 @@ public partial class TheWitcher : Mod
 
         UndertaleGameObject o_axii_charm_birth = Msl.AddObject(
             name: "o_axii_charm_birth",
-            parentName: "o_target_spell",
+            parentName: "o_spellbirth",
+            spriteName: "s_axiisign_cast_cast",
             isVisible: true,
             isPersistent: false,
             isAwake: true
@@ -161,9 +164,10 @@ public partial class TheWitcher : Mod
             "),
 
             // Control the chance of charm
-            new MslEvent(eventType: EventType.Alarm, subtype: 0, code: @$"
-                if (instance_exists(target) && variable_instance_exists(target, ""ai_is_on"") && target.ai_is_on)
+            new MslEvent(eventType: EventType.Other, subtype: 10, code: @$"
+                if (instance_exists(point) && variable_instance_exists(point, ""ai_is_on"") && point.ai_is_on)
                 {{
+                    var target = point
                     var _charm_chance = {Charm_Chance} - target.Psionic_Resistance
 
                     if (is_crit)

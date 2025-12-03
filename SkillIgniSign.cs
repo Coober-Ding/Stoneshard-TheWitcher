@@ -9,6 +9,7 @@ public partial class TheWitcher : Mod
     private void AddSkill_Igni_Sign()
     {
         AdjustSkillIcon("s_skills_igni_sign");
+        AdjustSpellCastSprites("s_ignisign_cast_", 15, 62);
 
         Msl.InjectTableSkillsLocalization(
             new LocalizationSkill(
@@ -91,7 +92,7 @@ public partial class TheWitcher : Mod
 
         UndertaleGameObject o_igni_sign_birth = Msl.AddObject(
             name: "o_igni_sign_birth",
-            spriteName: "s_firewall_birth",
+            spriteName: "s_ignisign_cast_cast",
             parentName: "o_spellbirth",
             isVisible: true,
             isPersistent: false,
@@ -114,6 +115,7 @@ public partial class TheWitcher : Mod
             new MslEvent(eventType: EventType.Create, subtype: 0, code: @"
                 event_inherited()
                 skill = ""Igni_Sign""
+                startcast_sprite_tag = ""s_ignisign_cast_""
                 scr_skill_atr(""Igni_Sign"")
                 ds_list_add(attribute,
                     ds_map_find_value(global.attribute, ""Magic_Power""),

@@ -77,4 +77,20 @@ public partial class TheWitcher : Mod
         ico.GMS2PlaybackSpeed = 1;
         ico.GMS2PlaybackSpeedType = AnimSpeedType.FramesPerGameFrame;
     }
+
+    private static void AdjustSpellCastSprites(string name, int originX, int originY)
+    {
+        string[] suffix = {"start", "loop", "cast", "cancel"};
+        foreach (string s in suffix)
+        {
+            UndertaleSprite ico = Msl.GetSprite(name + s);
+            ico.CollisionMasks.RemoveAt(0);
+            ico.IsSpecialType = true;
+            ico.SVersion = 3;
+            ico.OriginX = originX;
+            ico.OriginY = originY;
+            ico.GMS2PlaybackSpeed = 0.3f;
+            ico.GMS2PlaybackSpeedType = AnimSpeedType.FramesPerGameFrame;
+        }
+    }
 }

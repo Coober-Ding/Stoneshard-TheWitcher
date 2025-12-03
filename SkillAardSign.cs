@@ -9,6 +9,7 @@ public partial class TheWitcher : Mod
     private void AddSkill_Aard_Sign()
     {
         AdjustSkillIcon("s_skills_aard_sign");
+        AdjustSpellCastSprites("s_aardsign_cast_", 15, 62);
 
         Msl.InjectTableSkillsLocalization(
             new LocalizationSkill(
@@ -93,6 +94,7 @@ public partial class TheWitcher : Mod
         UndertaleGameObject o_aard_sign_birth = Msl.AddObject(
             name: "o_aard_sign_birth",
             parentName: "o_spellbirth",
+            spriteName: "s_aardsign_cast_cast",
             isVisible: true,
             isPersistent: false,
             isAwake: true
@@ -118,6 +120,7 @@ public partial class TheWitcher : Mod
             new MslEvent(eventType: EventType.Create, subtype: 0, code: @"
                 event_inherited()
                 skill = ""Aard_Sign""
+                startcast_sprite_tag = ""s_aardsign_cast_""
                 scr_skill_atr(""Aard_Sign"")
                 ds_list_add(attribute,
                     ds_map_find_value(global.attribute, ""Magic_Power""),

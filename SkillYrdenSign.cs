@@ -9,6 +9,7 @@ public partial class TheWitcher : Mod
     private void AddSkill_Yrden_Sign()
     {
         AdjustSkillIcon("s_skills_yrden_sign");
+        AdjustSpellCastSprites("s_yrdensign_cast_", 15, 62);
 
         Msl.InjectTableSkillsLocalization(
             new LocalizationSkill(
@@ -84,7 +85,7 @@ public partial class TheWitcher : Mod
 
         UndertaleGameObject o_yrden_sign_birth = Msl.AddObject(
             name: "o_yrden_sign_birth",
-            spriteName: "s_signofyrden_cast",
+            spriteName: "s_yrdensign_cast_cast",
             parentName: "o_spellbirth",
             isVisible: true,
             isPersistent: false,
@@ -95,6 +96,7 @@ public partial class TheWitcher : Mod
             new MslEvent(eventType: EventType.Create, subtype: 0, code: @"
                 event_inherited()
                 skill = ""Yrden_Sign""
+                startcast_sprite_tag = ""s_yrdensign_cast_""
                 scr_skill_atr(""Yrden_Sign"")
                 ds_list_add(attribute,
                     ds_map_find_value(global.attribute, ""Magic_Power""),
