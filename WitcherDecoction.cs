@@ -815,8 +815,8 @@ popz.v")
         Msl.LoadAssemblyAsString("gml_Object_o_skill_Other_13")
             .MatchFrom("bf [end]")
             .ReplaceBy("bf [1093]")
-            .MatchFrom("bf [end]")
-            .ReplaceBy("bf [1093]")
+            //.MatchFrom("bf [end]")
+            //.ReplaceBy("bf [1093]")
             .MatchFrom(":[end]")
             .InsertAbove(@"
 :[1093]

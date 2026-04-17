@@ -275,9 +275,9 @@ public partial class TheWitcher : Mod
 
         // Melee attack
         Msl.LoadGML("gml_GlobalScript_scr_attack")
-            .MatchFrom("var DMG_r = 0")
+            .MatchFrom("_hit = (!_isDodge)")
             .InsertAbove(@"
-                with (scr_instance_exists_in_list(o_b_magical_shield, _target.buffs))
+                with (scr_instance_exists_in_list(o_b_magical_shield, argument0.buffs))
                 {
                     should_execute = true
                     P_proc = false
@@ -286,18 +286,27 @@ public partial class TheWitcher : Mod
             .Save();
 
         // Spell attack
-        Msl.LoadGML("gml_GlobalScript_scr_skill_damage")
-            .MatchFrom("    var dmg = 0")
-            .InsertBelow(@"
-    with (scr_instance_exists_in_list(o_b_magical_shield, _target.buffs))
-    {
-        should_execute = true
-    }")
+        Msl.LoadAssemblyAsString("gml_GlobalScript_scr_skill_damage")
+            .MatchFrom("pop.v.i local.dmg")
+            .InsertBelow(@"push.v arg.argument0
+pushi.e -9
+push.v [stacktop]self.buffs
+pushi.e o_b_magical_shield
+call.i gml_Script_scr_instance_exists_in_list(argc=2)
+pushenv [1096]
+
+:[1094]
+pushi.e 1
+pop.v.b self.should_execute
+bf [1096]
+
+:[1096]
+popenv [1094]")
             .Save();
 
         // Arrow attack
         Msl.LoadGML("gml_Object_o_arrow_Other_10")
-            .MatchFrom("if P_proc")
+            .MatchFrom("if _isBlock")
             .InsertAbove(@"
             with (scr_instance_exists_in_list(o_b_magical_shield, _target.buffs))
             {
@@ -308,7 +317,7 @@ public partial class TheWitcher : Mod
 
         // Throwed item attack
         Msl.LoadGML("gml_Object_o_throwed_loot_Other_10")
-            .MatchFrom("if P_proc")
+            .MatchFrom("if _isBlock")
             .InsertAbove(@"
             with (scr_instance_exists_in_list(o_b_magical_shield, _target.buffs))
             {
@@ -375,23 +384,14 @@ popenv [1095]")
             .Save();
 
         // Damage reduction by magical shield
-        Msl.LoadGML("gml_GlobalScript_scr_damage_physical_calc")
-            .MatchFrom("var _dmgReal = math_round(argument3 * (max(((argument1 - argument4 * _partDamageNormalizer - argument0.tmpDEF * _partDamageNormalizer * (1 - Armor_Piercing / 100)) * (1 - argument2 / 100)), 0)))")
+        Msl.LoadGML("gml_GlobalScript_scr_damage_type_calc")
+            .MatchFrom("var _partDamageNormalizer = ")
             .InsertAbove(@"
         with (scr_instance_exists_in_list(o_b_magical_shield, argument0.buffs))
         {
-            damage = argument1
+            damage = arg0
             event_user(4)
-            argument1 = 0
-        }
-            ")
-            .MatchFrom("var _dmgReal = math_round(argument3 * (max(((argument1 - argument4 * _partDamageNormalizer - 0.5 * argument0.tmpDEF * _partDamageNormalizer * argument6) * (1 - argument2 / 100)), 0)))")
-            .InsertAbove(@"
-        with (scr_instance_exists_in_list(o_b_magical_shield, argument0.buffs))
-        {
-            damage = argument1
-            event_user(4)
-            argument1 = 0            
+            arg0 = 0
         }
             ")
             .Save();

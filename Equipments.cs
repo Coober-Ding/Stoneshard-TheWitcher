@@ -8,7 +8,7 @@ public partial class TheWitcher : Mod
 {
     private void AddEuipments()
     {
-        AddEuipments_Ursine();
+        // AddEuipments_Ursine();
     }
 
     private void AddEuipments_Ursine()

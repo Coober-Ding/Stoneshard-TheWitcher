@@ -251,10 +251,10 @@ public partial class TheWitcher : Mod
 
             new MslEvent(eventType: EventType.Other, subtype: 24, code: @"
                 event_inherited()
-                componentsContainer = scr_inventory_cells_container_create(itemsContainer, 5, o_inv_slot, 7, 7)
-                scr_inventory_cells_add(id, componentsContainer, 4)
-                consumsContainer = scr_inventory_cells_container_create(itemsContainer, 4, o_inv_slot, 21, 140)
-                scr_inventory_cells_add(id, consumsContainer, 3)
+                componentsContainer = scr_inventory_container_create(itemsContainer, 5, o_inv_slot, 7, 7)
+                scr_inventory_container_cells_add(id, componentsContainer, 4)
+                consumsContainer = scr_inventory_container_create(itemsContainer, 4, o_inv_slot, 21, 140)
+                scr_inventory_container_cells_add(id, consumsContainer, 3)
             ")
         );
 
@@ -345,6 +345,7 @@ function scr_crafting_recipe_get_map()
             .Save();
 
         // It seems we need to update this ASM codes every Stoneshard updates.
+        /*
         int index_menu = DataLoader.data.GameObjects.IndexOf(
             DataLoader.data.GameObjects.First(x => x.Name.Content == "o_craftingConsumsMenu"));
 
@@ -365,6 +366,7 @@ pushi.e {DataLoader.data.GameObjects.IndexOf(o_witcherAlchemyCraftingMenu)}
 cmp.i.v EQ
 bt [{btNum}]")
             .Save();
+        */
 
     }
 

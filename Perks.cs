@@ -306,7 +306,7 @@ popenv [44]")
         */
 
         Msl.LoadGML("gml_GlobalScript_scr_attack")
-            .MatchFromUntil(" if (_target.EVS >= 0)", "_evade = true")
+            .MatchFromUntil(" if (_target_evs >= 0)", "_evade = true")
             .InsertBelow(@"
                     if (_isPlayerTarget)
                     {
@@ -316,17 +316,18 @@ popenv [44]")
             ")
             .Save();
 
-        Msl.LoadGML("gml_Object_o_arrow_Other_10")
-            .MatchFrom("P_proc = scr_chance_value(_target.PRR)")
+        Msl.LoadGML("gml_GlobalScript_scr_attack_shot_block_chance")
+            .MatchFrom("_isBlock = scr_chance_value(PRR)")
             .InsertBelow(@"
                     else if (instance_exists(o_perk_professional_witcher))
                     {
-                        var _chance = _target.PRR * _target.Hit_Chance / 100
-                        P_proc = scr_chance_value(_chance)
+                        var _chance = PRR * Hit_Chance / 100
+                        _isBlock = scr_chance_value(_chance)
                     }
             ")
             .Save();
 
+        /*
         Msl.LoadGML("gml_Object_o_throwed_loot_Other_10")
             .MatchFrom("P_proc = scr_chance_value(_target.PRR)")
             .InsertBelow(@"
@@ -337,6 +338,7 @@ popenv [44]")
                     }
             ")
             .Save();
+        */
 
         Msl.InjectTableSkillsLocalization(
             new LocalizationSkill(
