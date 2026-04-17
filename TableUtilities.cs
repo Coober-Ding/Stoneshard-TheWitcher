@@ -1,11 +1,23 @@
 using ModShardLauncher;
-using ModShardLauncher.Mods;
-using UndertaleModLib.Models;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace TheWitcher;
 
-public class Utils
+public static partial class TableUtils
 {
+    /*
+    private static string? GetEnumMemberValue<T>(this T value)
+     where T : Enum
+    {
+        return typeof(T)
+            .GetTypeInfo()
+            .DeclaredMembers
+            .SingleOrDefault(x => x.Name == value.ToString())?
+            .GetCustomAttribute<EnumMemberAttribute>(false)?
+            .Value ?? value.ToString();
+    }
+    */
     public static void InjectItemsToTable(string table, string? anchor = null, int? defaultKey = null, params Dictionary<int, string>[] items)
     {
         List<string> lines = Msl.ThrowIfNull(ModLoader.GetTable(table));
@@ -144,4 +156,5 @@ public class Utils
 
         ModifyItemsInTable(table, match, mapped);
     }
+
 }

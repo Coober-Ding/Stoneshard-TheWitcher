@@ -174,14 +174,14 @@ public partial class TheWitcher : Mod
             ")
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: "witcher_medallion_wolf",
             Price: 200,
             EffPrice: 45,
-            Cat: Msl.ItemStatsCategory.treasure,
-            Material: Msl.ItemStatsMaterial.silver,
-            Weight: Msl.ItemStatsWeight.Light,
-            tags: Msl.ItemStatsTags.special
+            Cat: TableUtils.ItemStatsCategory.treasure,
+            Material: TableUtils.ItemStatsMaterial.silver,
+            Weight: TableUtils.ItemStatsWeight.Light,
+            tags: TableUtils.ItemStatsTags.special
         );
 
         Msl.InjectTableItemsLocalization(
@@ -285,15 +285,15 @@ public partial class TheWitcher : Mod
             ")
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: "ancient_troll_gland",
             Price: 600,
             EffPrice: 600,
-            tier: Msl.ItemStatsTier.Tier4,
-            Cat: Msl.ItemStatsCategory.ingredient,
-            Material: Msl.ItemStatsMaterial.organic,
-            Weight: Msl.ItemStatsWeight.Light,
-            tags: Msl.ItemStatsTags.alchemy
+            tier: TableUtils.ItemStatsTier.Tier4,
+            Cat: TableUtils.ItemStatsCategory.ingredient,
+            Material: TableUtils.ItemStatsMaterial.organic,
+            Weight: TableUtils.ItemStatsWeight.Light,
+            tags: TableUtils.ItemStatsTags.alchemy
         );
 
         Msl.InjectTableItemsLocalization(
@@ -327,14 +327,14 @@ public partial class TheWitcher : Mod
 
     private void AddGeraltStealSword()
     {
-        Msl.InjectTableWeapons(
+        TableUtils.InjectTableWeapons(
             name: "Geralt Steel Sword",
-            Tier: Msl.WeaponsTier.Tier2,
+            Tier: TableUtils.WeaponsTier.Tier2,
             id: "witchersword01",
-            Slot: Msl.WeaponsSlot.twohandedsword,
-            rarity: Msl.WeaponsRarity.Unique,
-            Mat: Msl.WeaponsMaterial.metal,
-            tags: Msl.WeaponsTags.specialexc,
+            Slot: TableUtils.WeaponsSlot.twohandedsword,
+            rarity: TableUtils.WeaponsRarity.Unique,
+            Mat: TableUtils.WeaponsMaterial.metal,
+            tags: TableUtils.WeaponsTags.specialexc,
             Price: 150,
             Markup: 1,
             MaxDuration: 95,

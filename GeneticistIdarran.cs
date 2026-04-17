@@ -321,6 +321,7 @@ public partial class TheWitcher : Mod
             .MatchFrom("npc_sprite = s_npc_Student04uni_work")
             .ReplaceBy("npc_sprite = s_npc_Idarran_reading\nis_rest = true")
             .Save();
+ 
     }
 
     private void EditRoom_BrynnNW()

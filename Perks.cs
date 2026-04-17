@@ -290,7 +290,7 @@ popenv [44]")
             ")
         );
 
-        /*
+        /* 废除
         Msl.LoadGML("gml_Object_o_skill_ico_Other_18")
             .MatchFrom("global.open_ranged_skill++")
             .InsertBelow(@"
@@ -319,7 +319,7 @@ popenv [44]")
         Msl.LoadGML("gml_GlobalScript_scr_attack_shot_block_chance")
             .MatchFrom("_isBlock = scr_chance_value(PRR)")
             .InsertBelow(@"
-                    else if (instance_exists(o_perk_professional_witcher))
+                    else if (is_player() && instance_exists(o_perk_professional_witcher))
                     {
                         var _chance = PRR * Hit_Chance / 100
                         _isBlock = scr_chance_value(_chance)

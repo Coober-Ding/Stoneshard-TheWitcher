@@ -48,7 +48,7 @@ public class Localization
             })
         );
 
-        Utils.InjectItemsToTable(
+        TableUtils.InjectItemsToTable(
             table: "gml_GlobalScript_table_items",
             anchor: "workbench;Верстак;Workbench;",
             defaultKey: 2,
@@ -81,7 +81,7 @@ public class Localization
 
     private static void AddGeraltTexts()
     {
-        Utils.InjectItemsToTable(
+        TableUtils.InjectItemsToTable(
             table: "gml_GlobalScript_table_text",
             anchor: ";char_name;char_name;",
             defaultKey: 2,
@@ -93,7 +93,7 @@ public class Localization
             }
         );
 
-        Utils.InjectItemsToTable(
+        TableUtils.InjectItemsToTable(
             table: "gml_GlobalScript_table_text",
             anchor: ";class_name;class_name;",
             defaultKey: 2,
@@ -105,7 +105,7 @@ public class Localization
             }
         );
 
-        Utils.InjectItemsToTable(
+        TableUtils.InjectItemsToTable(
             table: "gml_GlobalScript_table_text",
             anchor: ";char_desc;char_desc;",
             defaultKey: 2,
@@ -212,7 +212,7 @@ public class Localization
                 }
             )
         );
-
+        /*TODO 去布林，让杰洛特与不会奥尔多语的精灵对话看看,如果没问题则不修改
         Utils.ModifyItemsInTable(
             table: "gml_GlobalScript_table_lines",
             match: "greeting;any;elf_guard, elf_woman;",
@@ -239,7 +239,7 @@ public class Localization
                 ["Type"] = "arna, jonna, dirwin, velmir, leosthenes, jorgrim, hilda, geralt",
             }
         );
-
+        */
         Msl.InjectTableDialogLocalization(
             // --- [CHARACTERS] BASIC LINES ---
             new LocalizationSentence(
@@ -718,7 +718,7 @@ public class Localization
             )
         );
 
-        Utils.InjectItemsToTable(
+        TableUtils.InjectItemsToTable(
             table: "gml_GlobalScript_table_text",
             anchor: "examineKingStatue_Mahir",
             defaultKey: 2,
@@ -733,7 +733,7 @@ public class Localization
 
     private static void AddIdarranTexts()
     {
-        Utils.InjectItemsToTable(
+        TableUtils.InjectItemsToTable(
             table: "gml_GlobalScript_table_names",
             anchor: "NPC_info;NPC_info;NPC_info;",
             defaultKey: 2,

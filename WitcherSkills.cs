@@ -31,7 +31,7 @@ public partial class TheWitcher : Mod
         AddSkill_Igni_Sign();
 
         // Add Skill Branch
-
+        
         Msl.InjectTableTextTreesLocalization(
             new LocalizationTextTree(
                 id: "Witcher",
@@ -64,6 +64,7 @@ public partial class TheWitcher : Mod
             .MatchFrom("var _metaCategoriesArray = ")
             .InsertBelow(@"array_push(_metaCategoriesArray[1], o_skill_category_witcher)")
             .Save();
+
     }
 
     private static void AdjustSkillIcon(string name)
