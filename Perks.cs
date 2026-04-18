@@ -196,7 +196,7 @@ popenv [44]")
                 item = noone
                 evade = false
             "),
-
+            // other-10已经失效
             new MslEvent(eventType: EventType.Other, subtype: 10, code: @"
                 event_inherited()
             "),
