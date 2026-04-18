@@ -91,7 +91,6 @@ public partial class TheWitcher : Mod
                 scr_buying_loot_category(
                     ""alcohol"", ""beverage"", ""drug"", ""ingredient"",
                     ""jewelry"", ""valuable"", ""medicine"", ""potion"")
-                ds_list_add(singular_stock_list, o_inv_book_witcher1, o_inv_book_witcher2, o_inv_caravan_alchemy)
                 scr_npc_gold_init(200, 600)
                 Restock_Time = 24
                 Ingredient_BP_Mod += 0.33
@@ -159,6 +158,7 @@ public partial class TheWitcher : Mod
                         o_inv_harpy_decoction, o_inv_troll_decoction, o_inv_gulon_decoction), 1
                 )
                 scr_selling_loot_category(""herb"", irandom_range(16, 24))
+                ds_list_add(singular_stock_list, o_inv_book_witcher1, o_inv_book_witcher2, o_inv_caravan_alchemy)
             ")
         );
 
