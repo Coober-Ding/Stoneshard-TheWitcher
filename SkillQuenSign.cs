@@ -333,13 +333,53 @@ popenv [1094]
             }")
             .Save();
 
-                // Finish execution
+        // Finish execution
+        Msl.LoadAssemblyAsString("gml_GlobalScript_scr_damage_calculation")
+            .MatchFrom("pop.v.v self.is_deal_damage")
+            .InsertBelow(@"pushbltn.v builtin.argument0
+pushi.e -9
+push.v [stacktop]self.buffs
+pushi.e o_b_magical_shield
+conv.i.v
+call.i gml_Script_scr_instance_exists_in_list(argc=2)
+pushi.e -9
+pushenv [1097]
+
+:[1095]
+pushi.e 0
+pop.v.b self.should_execute
+pushi.e 0
+conv.i.v
+pushi.e 4
+conv.i.v
+pushi.e snd_block_1
+conv.i.v
+pushi.e snd_block_2
+conv.i.v
+pushi.e snd_block_3
+conv.i.v
+pushi.e snd_block_4
+conv.i.v
+call.i choose(argc=4)
+call.i audio_play_sound(argc=3)
+popz.v
+push.v self.Shield_Duration
+pushi.e 0
+cmp.i.v LTE
+bf [1097]
+
+:[1096]
+call.i instance_destroy(argc=0)
+popz.v
+
+:[1097]
+popenv [1095]")
+            .Save();
 
 
 
-
-                // Throwed net
-                Msl.LoadGML("gml_Object_o_net_throw_Alarm_0")
+        // Throwed net
+        Msl.LoadGML("gml_Object_o_net_throw_Alarm_0")
                     .MatchFrom("_shield = scr_instance_exists_in_list")
                     .ReplaceBy("_shield = (scr_instance_exists_in_list(o_b_aether_shield) || scr_instance_exists_in_list(o_b_magical_shield))")
                     .Save();
