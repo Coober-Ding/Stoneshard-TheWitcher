@@ -196,11 +196,11 @@ popenv [44]")
                 item = noone
                 evade = false
             "),
-
+            // other-10已经失效
             new MslEvent(eventType: EventType.Other, subtype: 10, code: @"
                 event_inherited()
             "),
-
+            // 暴击加闪避
             new MslEvent(eventType: EventType.Other, subtype: 11, code: @"
                 if (attack_result == ""crit"")
                 {
@@ -209,7 +209,7 @@ popenv [44]")
                     scr_temp_effect_update(object_index, o_player, ""Block_Power"", 5, 3, 5)
                 }
             "),
-
+            // 闪避格挡加暴击
             new MslEvent(eventType: EventType.Other, subtype: 12, code: @"
                 if ((attack_result == ""block"") || (attack_result == ""fumbleBlock"")
                         || (evade && (attack_result == ""miss"" || attack_result == ""fumble"")))
@@ -290,7 +290,7 @@ popenv [44]")
             ")
         );
 
-        /*
+        /* 废除
         Msl.LoadGML("gml_Object_o_skill_ico_Other_18")
             .MatchFrom("global.open_ranged_skill++")
             .InsertBelow(@"
@@ -304,7 +304,7 @@ popenv [44]")
             ")
             .Save();
         */
-
+        // 标记闪避
         Msl.LoadGML("gml_GlobalScript_scr_attack")
             .MatchFromUntil(" if (_target_evs >= 0)", "_evade = true")
             .InsertBelow(@"
@@ -315,11 +315,11 @@ popenv [44]")
                     }
             ")
             .Save();
-
+        // 面对远程投射物，可以用自己的精准度来格挡
         Msl.LoadGML("gml_GlobalScript_scr_attack_shot_block_chance")
             .MatchFrom("_isBlock = scr_chance_value(PRR)")
             .InsertBelow(@"
-                    else if (instance_exists(o_perk_professional_witcher))
+                    else if (is_player() && instance_exists(o_perk_professional_witcher))
                     {
                         var _chance = PRR * Hit_Chance / 100
                         _isBlock = scr_chance_value(_chance)

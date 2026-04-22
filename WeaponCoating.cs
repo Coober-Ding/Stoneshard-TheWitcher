@@ -182,16 +182,16 @@ public partial class TheWitcher : Mod
             ")
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: id,
-            Material: Msl.ItemStatsMaterial.glass,
-            Weight: Msl.ItemStatsWeight.Medium,
+            Material: TableUtils.ItemStatsMaterial.glass,
+            Weight: TableUtils.ItemStatsWeight.Medium,
             Price: 200,
             Duration: 60,
             Stacks: 3,
-            Cat: Msl.ItemStatsCategory.tool,
+            Cat: TableUtils.ItemStatsCategory.tool,
             bottle: true,
-            tags: Msl.ItemStatsTags.special
+            tags: TableUtils.ItemStatsTags.special
         );
 
         oil_idx++;

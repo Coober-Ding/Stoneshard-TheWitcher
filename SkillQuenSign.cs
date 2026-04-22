@@ -272,7 +272,7 @@ public partial class TheWitcher : Mod
                 }
             ")
         );
-
+        
         // Melee attack
         Msl.LoadGML("gml_GlobalScript_scr_attack")
             .MatchFrom("_hit = (!_isDodge)")
@@ -286,22 +286,29 @@ public partial class TheWitcher : Mod
             .Save();
 
         // Spell attack
+        /**
+         
+         with (scr_instance_exists_in_list(o_b_magical_shield, _target.buffs))
+            should_execute = true
+         */
         Msl.LoadAssemblyAsString("gml_GlobalScript_scr_skill_damage")
             .MatchFrom("pop.v.i local.dmg")
-            .InsertBelow(@"push.v arg.argument0
+            .InsertBelow(@"push.v self.target
 pushi.e -9
 push.v [stacktop]self.buffs
 pushi.e o_b_magical_shield
+conv.i.v
 call.i gml_Script_scr_instance_exists_in_list(argc=2)
+pushi.e -9
 pushenv [1096]
 
 :[1094]
 pushi.e 1
 pop.v.b self.should_execute
-bf [1096]
 
 :[1096]
-popenv [1094]")
+popenv [1094]
+")
             .Save();
 
         // Arrow attack
@@ -314,7 +321,7 @@ popenv [1094]")
                 P_proc = false
             }")
             .Save();
-
+       
         // Throwed item attack
         Msl.LoadGML("gml_Object_o_throwed_loot_Other_10")
             .MatchFrom("if _isBlock")
@@ -326,56 +333,16 @@ popenv [1094]")
             }")
             .Save();
 
-        // Finish execution
-
-        Msl.LoadAssemblyAsString("gml_GlobalScript_scr_damage_calculation")
-            .MatchFrom("pop.v.v self.is_deal_damage")
-            .InsertBelow(@"pushbltn.v builtin.argument0
-pushi.e -9
-push.v [stacktop]self.buffs
-pushi.e o_b_magical_shield
-conv.i.v
-call.i gml_Script_scr_instance_exists_in_list(argc=2)
-pushi.e -9
-pushenv [1097]
-
-:[1095]
-pushi.e 0
-pop.v.b self.should_execute
-pushi.e 0
-conv.i.v
-pushi.e 4
-conv.i.v
-pushi.e snd_block_1
-conv.i.v
-pushi.e snd_block_2
-conv.i.v
-pushi.e snd_block_3
-conv.i.v
-pushi.e snd_block_4
-conv.i.v
-call.i choose(argc=4)
-call.i audio_play_sound(argc=3)
-popz.v
-push.v self.Shield_Duration
-pushi.e 0
-cmp.i.v LTE
-bf [1097]
-
-:[1096]
-call.i instance_destroy(argc=0)
-popz.v
-
-:[1097]
-popenv [1095]")
-            .Save();
+                // Finish execution
 
 
-        // Throwed net
-        Msl.LoadGML("gml_Object_o_net_throw_Alarm_0")
-            .MatchFrom("_shield = scr_instance_exists_in_list")
-            .ReplaceBy("_shield = (scr_instance_exists_in_list(o_b_aether_shield) || scr_instance_exists_in_list(o_b_magical_shield))")
-            .Save();
+
+
+                // Throwed net
+                Msl.LoadGML("gml_Object_o_net_throw_Alarm_0")
+                    .MatchFrom("_shield = scr_instance_exists_in_list")
+                    .ReplaceBy("_shield = (scr_instance_exists_in_list(o_b_aether_shield) || scr_instance_exists_in_list(o_b_magical_shield))")
+                    .Save();
 
         // Throwed web
         Msl.LoadGML("gml_Object_o_web_spit_Alarm_0")
@@ -389,9 +356,9 @@ popenv [1095]")
             .InsertAbove(@"
         with (scr_instance_exists_in_list(o_b_magical_shield, argument0.buffs))
         {
-            damage = arg0
+            damage = argument1
             event_user(4)
-            arg0 = 0
+            argument1 = 0
         }
             ")
             .Save();

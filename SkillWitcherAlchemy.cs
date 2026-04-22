@@ -11,25 +11,21 @@ public partial class TheWitcher : Mod
 {
     private void AddSkill_Witcher_Alchemy()
     {
-        AdjustSkillIcon("s_witcher_alchemy");
+        
         AddWitcherAlchemy_Alcohol();
+        
+        AdjustSkillIcon("s_witcher_alchemy");
 
         // Skill - Witcher Alchemy
-
+        
         Msl.InjectTableSkillsStats(
             id: "Witcher_Alchemy",
             Object: "object",
             hook: Msl.SkillsStatsHook.BASIC
         );
-
+        
         UndertaleGameObject o_skill_witcher_alchemy = Msl.GetObject("o_skill_witcher_alchemy");
-
-        AddWeaponOil();
-        AddWitcherPotion();
-        AddWitcherDecoction();
-        AddWitcherAlchemyCraftingMenu();
-        AddBrynnUniversityAlchemyStation();
-
+        
         o_skill_witcher_alchemy.ApplyEvent(
             new MslEvent(eventType: EventType.Create, subtype: 0, code: @"
                 event_inherited()
@@ -58,7 +54,18 @@ public partial class TheWitcher : Mod
                 KD = 0
             ")
         );
+        
 
+        AddWeaponOil();
+       
+        AddWitcherPotion();
+
+        AddWitcherDecoction();
+
+        AddWitcherAlchemyCraftingMenu();
+        
+        AddBrynnUniversityAlchemyStation();
+        
         UndertaleGameObject o_skill_witcher_alchemy_ico = Msl.GetObject("o_skill_witcher_alchemy_ico");
 
         o_skill_witcher_alchemy_ico.ApplyEvent(
@@ -68,26 +75,6 @@ public partial class TheWitcher : Mod
                 event_perform_object(child_skill, ev_create, 0)
             ")
 
-        // 每次游戏加载成功，这个事件就会执行一次。
-        /*
-        new MslEvent(eventType: EventType.Other, subtype: 18, code: @"
-            event_inherited()
-
-            var _list = scr_atr(""recipesWitcherAlchemyOpened"")
-            if (is_undefined(_list))
-            {
-                _list = __dsDebuggerListCreate()
-                scr_atr_set(""recipesWitcherAlchemyOpened"", _list)
-            }
-
-            with (o_craftingMenu)
-            {
-                event_user(11)
-                event_user(13)
-                event_user(12)
-            }
-        ")
-        */
         );
 
         AddCaravanAlchemyStation();
@@ -98,12 +85,12 @@ public partial class TheWitcher : Mod
         UndertaleGameObject o_inv_alcohol_essentia = Msl.GetObject("o_inv_alcohol_essentia");
         UndertaleGameObject o_loot_alcohol_essentia = Msl.GetObject("o_loot_alcohol_essentia");
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: "alcohol_essentia",
             Price: 60,
-            Cat: Msl.ItemStatsCategory.alcohol,
-            Material: Msl.ItemStatsMaterial.glass,
-            Weight: Msl.ItemStatsWeight.Light,
+            Cat: TableUtils.ItemStatsCategory.alcohol,
+            Material: TableUtils.ItemStatsMaterial.glass,
+            Weight: TableUtils.ItemStatsWeight.Light,
             Duration: 240,
             Thirsty: 70,
             Intoxication: 40,
@@ -111,7 +98,7 @@ public partial class TheWitcher : Mod
             Pain_Change: -0.5f,
             Sanity_Change: -0.2f,
             bottle: true,
-            tags: Msl.ItemStatsTags.special
+            tags: TableUtils.ItemStatsTags.special
         );
 
         o_inv_alcohol_essentia.ApplyEvent(

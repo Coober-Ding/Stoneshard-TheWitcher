@@ -959,15 +959,15 @@ popz.v
             isAwake: true
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: id,
             Price: 500,
-            Cat: Msl.ItemStatsCategory.beverage,
-            Subcat: Msl.ItemStatsSubcategory.potion,
-            Material: Msl.ItemStatsMaterial.glass,
-            Weight: Msl.ItemStatsWeight.Light,
+            Cat: TableUtils.ItemStatsCategory.beverage,
+            Subcat: TableUtils.ItemStatsSubcategory.potion,
+            Material: TableUtils.ItemStatsMaterial.glass,
+            Weight: TableUtils.ItemStatsWeight.Light,
             Duration: 120,
-            tags: Msl.ItemStatsTags.special,
+            tags: TableUtils.ItemStatsTags.special,
             bottle: true
         );
 

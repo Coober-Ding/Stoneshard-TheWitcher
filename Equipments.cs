@@ -13,16 +13,16 @@ public partial class TheWitcher : Mod
 
     private void AddEuipments_Ursine()
     {
-        Msl.InjectTableArmor(
-            hook: Msl.ArmorHook.CHESTPIECES,
+        TableUtils.InjectTableArmor(
+            hook: TableUtils.ArmorHook.CHESTPIECES,
             name: "Ursine Armor",
-            Tier: Msl.ArmorTier.Tier5,
+            Tier: TableUtils.ArmorTier.Tier5,
             id: "ursinearmor01",
-            Slot: Msl.ArmorSlot.Chest,
-            Class: Msl.ArmorClass.Heavy,
-            rarity: Msl.ArmorRarity.Unique,
-            Mat: Msl.ArmorMaterial.metal,
-            tags: Msl.ArmorTags.special,
+            Slot: TableUtils.ArmorSlot.Chest,
+            Class: TableUtils.ArmorClass.Heavy,
+            rarity: TableUtils.ArmorRarity.Unique,
+            Mat: TableUtils.ArmorMaterial.metal,
+            tags: TableUtils.ArmorTags.special,
             MaxDuration: 360,
             Price: 12450,
             Markup: 1.25f,

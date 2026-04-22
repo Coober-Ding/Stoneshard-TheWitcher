@@ -10,3 +10,6 @@ bin
 *.pdf
 *.pptx
 *.zip
+
+# Visual Studio files and folders
+.vs/

@@ -131,26 +131,26 @@ public partial class TheWitcher : Mod
             ")
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: "book_witcher1",
             Price: 250,
             EffPrice: 50,
-            Material: Msl.ItemStatsMaterial.paper,
-            tier: Msl.ItemStatsTier.Tier1,
-            Subcat: Msl.ItemStatsSubcategory.treatise,
-            Weight: Msl.ItemStatsWeight.Light,
-            tags: Msl.ItemStatsTags.special
+            Material: TableUtils.ItemStatsMaterial.paper,
+            tier: TableUtils.ItemStatsTier.Tier1,
+            Subcat: TableUtils.ItemStatsSubcategory.treatise,
+            Weight: TableUtils.ItemStatsWeight.Light,
+            tags: TableUtils.ItemStatsTags.special
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: "book_witcher2",
             Price: 250,
             EffPrice: 50,
-            Material: Msl.ItemStatsMaterial.paper,
-            tier: Msl.ItemStatsTier.Tier2,
-            Subcat: Msl.ItemStatsSubcategory.treatise,
-            Weight: Msl.ItemStatsWeight.Light,
-            tags: Msl.ItemStatsTags.special
+            Material: TableUtils.ItemStatsMaterial.paper,
+            tier: TableUtils.ItemStatsTier.Tier2,
+            Subcat: TableUtils.ItemStatsSubcategory.treatise,
+            Weight: TableUtils.ItemStatsWeight.Light,
+            tags: TableUtils.ItemStatsTags.special
         );
 
         Msl.InjectTableBooksLocalization(

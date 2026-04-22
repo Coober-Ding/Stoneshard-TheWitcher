@@ -374,15 +374,15 @@ switch (idName)
             isAwake: true
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: id,
             Price: 200,
-            Cat: Msl.ItemStatsCategory.beverage,
-            Subcat: Msl.ItemStatsSubcategory.potion,
-            Material: Msl.ItemStatsMaterial.glass,
-            Weight: Msl.ItemStatsWeight.Light,
+            Cat: TableUtils.ItemStatsCategory.beverage,
+            Subcat: TableUtils.ItemStatsSubcategory.potion,
+            Material: TableUtils.ItemStatsMaterial.glass,
+            Weight: TableUtils.ItemStatsWeight.Light,
             Duration: duration,
-            tags: Msl.ItemStatsTags.special,
+            tags: TableUtils.ItemStatsTags.special,
             bottle: true
         );
 
@@ -457,15 +457,15 @@ break;
             isAwake: true
         );
 
-        Msl.InjectTableItemStats(
+        TableUtils.InjectTableItemStats(
             id: id,
             Price: 200,
-            Cat: Msl.ItemStatsCategory.beverage,
-            Subcat: Msl.ItemStatsSubcategory.potion,
-            Material: Msl.ItemStatsMaterial.glass,
-            Weight: Msl.ItemStatsWeight.Light,
+            Cat: TableUtils.ItemStatsCategory.beverage,
+            Subcat: TableUtils.ItemStatsSubcategory.potion,
+            Material: TableUtils.ItemStatsMaterial.glass,
+            Weight: TableUtils.ItemStatsWeight.Light,
             Duration: 20,
-            tags: Msl.ItemStatsTags.special,
+            tags: TableUtils.ItemStatsTags.special,
             bottle: true
         );
 
