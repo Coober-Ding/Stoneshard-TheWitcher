@@ -293,7 +293,7 @@ public partial class TheWitcher : Mod
          */
         Msl.LoadAssemblyAsString("gml_GlobalScript_scr_skill_damage")
             .MatchFrom("pop.v.i local.dmg")
-            .InsertBelow(@"push.v self.target
+            .InsertBelow(@"push.v arg.argument0
 pushi.e -9
 push.v [stacktop]self.buffs
 pushi.e o_b_magical_shield
