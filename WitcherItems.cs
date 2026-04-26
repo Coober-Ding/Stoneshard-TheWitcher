@@ -367,5 +367,9 @@ public partial class TheWitcher : Mod
                 }
             )
         );
+        // sprite中心点设置
+        UndertaleSprite swordSprite = Msl.GetSprite("s_loot_geraltsteelsword");
+        swordSprite.OriginX = 17;
+        swordSprite.OriginY = 9;
     }
 }
