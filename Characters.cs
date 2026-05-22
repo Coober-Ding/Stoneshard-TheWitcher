@@ -61,7 +61,8 @@ public partial class TheWitcher : Mod
                             }
                             with (scr_equip(""Worn Cloak"", (1 << 0)))
                                 scr_inv_atr_set(""Duration"", 100)
-                            with (scr_equip(""Geralt Steel Sword"", (1 << 0)))
+                            // Spawn to backpack first (same path as Kelvin sword) for pickup behavior parity.
+                            with (scr_inventory_add_weapon(""Geralt Steel Sword"", (1 << 0)))
                                 scr_inv_atr_set(""Duration"", 100)
                             with (scr_equip(""Fine Shirt"", (1 << 0)))
                                 scr_inv_atr_set(""Duration"", 100)

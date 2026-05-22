@@ -325,28 +325,80 @@ public partial class TheWitcher : Mod
             .Save();
     }
 
+    // ---------------------------------------------------------------------------
+    // 武器表列索引 (83 列) — 与 Stoneshard 原版 table_weapons.gml 的 CSV 列严格对应。
+    // 结构来源：参考弃誓骑士 mod 的 Equipments.cs（亲测可用，凯尔文家族长剑落地后能正常拾取）。
+    // ---------------------------------------------------------------------------
+    private static class WCol
+    {
+        public const int Name = 0, Tier = 1, Id = 2, Slot = 3, Subtype = 4, Rarity = 5, Mat = 6;
+        public const int Price = 7, Markup = 8, MaxDuration = 9, Rng = 10;
+        public const int ArmorPiercing = 12, ArmorDamage = 13, BodypartDamage = 14;
+        public const int Slash = 16, Pierce = 17, Blunt = 18, Rend = 19;
+        public const int Fire = 20, Shock = 21, Poison = 22, Caustic = 23, Frost = 24;
+        public const int Arcane = 25, Unholy = 26, Sacred = 27, Psionic = 28;
+        public const int FMB = 30, HitChance = 31, CRT = 32, CRTD = 33, CTA = 34;
+        public const int PRR = 35, BlockPower = 36, BlockRecovery = 37;
+        public const int Bleeding = 39, Daze = 40, Stun = 41, Knockback = 42, Immob = 43, Stagger = 44;
+        public const int MP = 46, MPRestoration = 47, CDR = 48;
+        public const int AbilitiesEnergy = 49, SkillsEnergy = 50, SpellsEnergy = 51;
+        public const int MagicPower = 52, Miscast = 53, MiracleChance = 54, MiraclePower = 55, BonusRange = 56;
+        public const int MaxHP = 58, HealthRestoration = 59, HealingReceived = 60;
+        public const int CritAvoid = 61, FatigueGain = 62, Lifesteal = 63, Manasteal = 64, DamageReceived = 65;
+        public const int Balance = 76, Tags = 77, Upgrade = 78, Fireproof = 79, NoDrop = 80, Audio = 81;
+        public const int Count = 83;
+    }
+
+    private static string BuildWeaponRow(params (int index, string value)[] values)
+    {
+        string[] cols = new string[WCol.Count];
+        for (int i = 0; i < WCol.Count; i++) cols[i] = "";
+        foreach (var (index, value) in values)
+            cols[index] = value;
+        return string.Join(";", cols);
+    }
+
+    private static void InsertWeaponRow(string anchor, string row)
+    {
+        const string tableKey = "gml_GlobalScript_table_weapons";
+        List<string> lines = ModLoader.GetTable(tableKey);
+        int pos = lines.FindIndex(l => l.StartsWith(anchor));
+        if (pos < 0) pos = lines.Count;
+        lines.Insert(pos, row);
+        ModLoader.SetTable(lines, tableKey);
+    }
+
     private void AddGeraltStealSword()
     {
-        TableUtils.InjectTableWeapons(
-            name: "Geralt Steel Sword",
-            Tier: TableUtils.WeaponsTier.Tier2,
-            id: "witchersword01",
-            Slot: TableUtils.WeaponsSlot.twohandedsword,
-            rarity: TableUtils.WeaponsRarity.Unique,
-            Mat: TableUtils.WeaponsMaterial.metal,
-            tags: TableUtils.WeaponsTags.specialexc,
-            Price: 150,
-            Markup: 1,
-            MaxDuration: 95,
-            Rng: 1,
+        // 改用与弃誓骑士「凯尔文家族长剑」一致的直接写表方式 —— 绕过 Witcher mod
+        // 自带的 InjectTableWeapons（其行末尾少了若干 trailing 字段，可能导致
+        // 通用 o_inv_<slot> fallback 路径下 can_remove / is_cursed 隐式状态错位，
+        // 表现为「丢在地上点击无反应」）。
+        // 改写后行结构与原版 CSV 严格一致，tags 用 "unique"（独占性由 scr_weapon_tags_compare
+        // 过滤保证，不在 "aldor common" 默认搜索集合内）。
+        const string name = "Geralt Steel Sword";
 
-            Slashing_Damage: 20,
-            Armor_Piercing: 10,
-            Block_Power: 6,
-            PRR: 4,
-            CTA: 2,
-            Skills_Energy_Cost: 10
+        string row = BuildWeaponRow(
+            (WCol.Name,           name),
+            (WCol.Tier,           "2"),
+            (WCol.Id,             "witchersword01"),
+            (WCol.Slot,           "2hsword"),
+            (WCol.Rarity,         "Unique"),
+            (WCol.Mat,            "metal"),
+            (WCol.Price,          "150"),
+            (WCol.Markup,         "1"),
+            (WCol.MaxDuration,    "95"),
+            (WCol.Rng,            "1"),
+            (WCol.ArmorPiercing,  "10"),
+            (WCol.Slash,          "20"),
+            (WCol.CTA,            "2"),
+            (WCol.PRR,            "4"),
+            (WCol.BlockPower,     "6"),
+            (WCol.SkillsEnergy,   "10"),
+            (WCol.Balance,        "0"),
+            (WCol.Tags,           "unique")
         );
+        InsertWeaponRow("// AOE", row);
 
         Msl.InjectTableWeaponTextsLocalization(
             new LocalizationWeaponText(
