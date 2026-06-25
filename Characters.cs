@@ -47,11 +47,12 @@ public partial class TheWitcher : Mod
                 {
                     if (!is_start_equipment)
                     {
+                        scr_atr_set_simple(""Head"", ""s_GeraltHead"")
+                        scr_atr_set_simple(""CorpseSprite"", sprite_get_name(s_Geralt_dead))
+                        scr_atr_set_simple(""BodySprite"", sprite_get_name(s_GeraltBody))
+                        scr_playerSpriteInit()
                         if (!global.is_load_game)
                         {
-                            scr_atr_set_simple(""Head"", ""s_GeraltHead"")
-                            scr_atr_set_simple(""CorpseSprite"", sprite_get_name(s_Geralt_dead))
-                            scr_atr_set_simple(""BodySprite"", sprite_get_name(s_GeraltBody))
                             with(scr_inventory_add_item(o_inv_witcher_medallion_wolf))
                             {
                                 onStart_equipped = true
@@ -60,7 +61,8 @@ public partial class TheWitcher : Mod
                             }
                             with (scr_equip(""Worn Cloak"", (1 << 0)))
                                 scr_inv_atr_set(""Duration"", 100)
-                            with (scr_equip(""Geralt Steel Sword"", (6 << 0)))
+                            // Spawn to backpack first (same path as Kelvin sword) for pickup behavior parity.
+                            with (scr_inventory_add_weapon(""Geralt Steel Sword"", (1 << 0)))
                                 scr_inv_atr_set(""Duration"", 100)
                             with (scr_equip(""Fine Shirt"", (1 << 0)))
                                 scr_inv_atr_set(""Duration"", 100)
@@ -88,15 +90,13 @@ public partial class TheWitcher : Mod
                         else
                             scr_load_player()
                         with (other.id)
-                        {
                             alarm[11] = 3
-                            scr_playerSpriteInit()
-                        }
                     }
                     is_start_equipment = true
                 }
                 sprite_index = __asset_get_index(scr_atr(""BodySprite""))
-                medallion_turns = 60
+                if (!variable_instance_exists(id, ""medallion_turns""))
+                    medallion_turns = 60
             "),
 
             new MslEvent(eventType: EventType.Other, subtype: 12, code: @"
