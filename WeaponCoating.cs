@@ -317,15 +317,15 @@ public partial class TheWitcher : Mod
     private void AddWeaponOilDamageMechanism()
     {
         Msl.LoadAssemblyAsString("gml_GlobalScript_scr_damage_calculation")
-            .MatchFrom("call.i gml_Script_scr_actionsLogVisible(argc=1)")
-            .InsertAbove(@"pushloc.v local._damage
+            .MatchFromUntil("call.i gml_Script_scr_psy_change", ":[")
+            .InsertBelow(@"push.v arg.argument0
+pushloc.v local._damage
 call.i gml_Script_scr_coating_oil_damage_calc(argc=2)
 pop.v.v local._oil_damage
 push.v local._damage
 pushloc.v local._oil_damage
 add.v.v
-pop.v.v local._damage
-push.v arg.argument0")
+pop.v.v local._damage")
             .MatchFromUntil("push.s \"Slashing\"", "pushloc.v local._slashing")
             .InsertBelow(@"push.s ""Weapon_Oil""
 conv.s.v

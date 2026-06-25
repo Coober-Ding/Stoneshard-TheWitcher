@@ -13,8 +13,8 @@ public partial class TheWitcher : Mod
     public override string Author => "";
     public override string Name => "The Witcher";
     public override string Description => "Coder: Altair, 坦桑尼亚斑马\nDesigner: Altair, 北境的救世主, 蓝火\nArtist: 海兰芝, 北境的救世主, 六月下午的猫";
-    public override string Version => "0.4.4";
-    public override string TargetVersion => "0.9.2.16";
+    public override string Version => "0.4.5";
+    public override string TargetVersion => "0.9.3.13";
 
     public override void PatchMod()
     {
